@@ -1,20 +1,13 @@
+//单例模式
+
 package main
 
 import (
-	"fmt"
 	"sync"
 )
 
 type Instance struct {
 	Val int
-}
-
-func (inst *Instance) Show() {
-	fmt.Println(inst.Val)
-}
-
-func (inst *Instance) Set(a int) {
-	inst.Val = a
 }
 
 var (
@@ -34,7 +27,5 @@ func main() {
 			wg.Done()
 		}(i)
 	}
-
 	wg.Wait()
-	inst.Show()
 }
