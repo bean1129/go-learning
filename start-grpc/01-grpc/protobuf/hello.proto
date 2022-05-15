@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package="../protobuf/hello";
+
+message HelloRequest {
+    string value = 1;
+}
+
+message HelloResponse{
+    // 定义接收的参数
+    // 参数类型 参数名 标识号(不可重复)
+    int32 code = 1;  //状态码
+    string value = 2;//接收值
+}
+
+service HelloService {
+    rpc Hello (HelloRequest) returns (HelloResponse);
+}
+
+
+

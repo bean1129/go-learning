@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package="../protobuf/http_hello";
+
+import "github.com/mwitkow/go-proto-validators/validator.proto";
+import "google/api/annotations.proto";
+
+message HelloRequest {
+    string value = 1 [
+        (validator.field) = {regex: "^[a-z]{2,5}$"}
+    ];
+}
+
+message HelloResponse{
+    // 定义接收的参数
+    int32 code = 1 [
+        (validator.field) = {int_gt: 0, int_lt: 100}
+    ];
+    string value = 2 [
+        (validator.field) = {regex: "^[a-z]{2,5}$"}
+    ];
+
+}
+
+service HelloService {
+    rpc Hello (HelloRequest) returns (HelloResponse){
+        option (google.api.http) ={
+            post:"/hello"
+            body:"*"
+        };
+    }
+}
+
+
+
